@@ -54,7 +54,7 @@ Example entry in `inks.json`:
 
 ## Contributing
 
-I welcome contributions from the fountain pen community! To add new inks or update existing entries
+I welcome contributions from the fountain pen community! Please download the app on the Play Store to contribute to this database with your own collection.
 
 Please ensure your contributions are accurate and well-researched. All submissions will be reviewed before being merged.
 
