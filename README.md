@@ -3,6 +3,14 @@
 This repository serves as the public, community-driven database for the Inkwell mobile app. It contains a curated collection of fountain pen ink data, primarily in the `inks.json` file, which is utilized by the Inkwell app to provide users with a comprehensive and up-to-date resource for tracking their ink collections.
 
 <!-- LEADERBOARD_START -->
+
+### Top 10 Contributors
+
+| Rank | Contributor | Inks Added |
+|---|---|---|
+| 1 | Your Name Here | 1 |
+
+
 <!-- LEADERBOARD_END -->
 
 ## Purpose
