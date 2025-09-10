@@ -4,6 +4,14 @@ This repository serves as the public, community-driven database for the Inkwell 
 - Top contributors:
 
 <!-- LEADERBOARD_START -->
+
+### Top 10 Contributors
+
+| Rank | Contributor | Inks Added |
+|---|---|---|
+| 1 | Your Name Here | 1 |
+
+
 <!-- LEADERBOARD_END -->
 
 ## Purpose
