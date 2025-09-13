@@ -33,21 +33,24 @@ The core data is stored in `inks.json`. This file is structured as an array of i
 - `flow`: (Optional) String indicating the flow (e.g., "Dry", "Medium", "Wet").
 - `notes`: (Optional) Any additional notes about the ink.
 - `credit`: (Optional) Name of the contributor.
+- `purchase link`: (Optional) A URL to purchase the ink.
 
 Example entry in `inks.json`:
 ```json
 [
   {
-    "name": "Kon-Peki",
-    "brand": "Pilot Iroshizuku",
-    "color": "Blue",
-    "shading": true,
-    "sheen": false,
-    "shimmer": false,
-    "waterResistance": false,
-    "flow": "Wet",
-    "notes": "A vibrant sky blue.",
-    "credit": "John Doe"
+    "id": 1,
+    "name": "Aurora Borealis",
+    "brand": "Diamine",
+    "color": "#004B49",
+    "shading": 1,
+    "sheen": 1,
+    "shimmer": 0,
+    "waterResistance": 0,
+    "flow": "Medium",
+    "notes": "A beautiful teal ink with a red sheen.",
+    "credit": "John Doe",
+    "purchase link": "testlink.com"
   }
 ]
 ```
@@ -57,6 +60,13 @@ Example entry in `inks.json`:
 I welcome contributions from the fountain pen community! Please download the app on the Play Store to contribute to this database with your own collection.
 
 Please ensure your contributions are accurate and well-researched. All submissions will be reviewed before being merged.
+
+## Scripts
+
+This repository includes a `scripts` directory containing utility scripts:
+
+- `validate_json.py`: This script validates the `json_data/inks.json` file to ensure it is well-formed JSON.
+- `generate_leaderboard.py`: This script fetches ink data and updates the contributor leaderboard in the `README.md`.
 
 ## Usage in Inkwell App
 
