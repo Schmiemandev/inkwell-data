@@ -8,7 +8,7 @@ This repository serves as the public, community-driven database for the Inkwell 
 
 | Rank | Contributor | Inks Added |
 |---|---|---|
-| 1 | Your Name Here | 1 |
+| 1 | John Doe | 1 |
 
 
 <!-- LEADERBOARD_END -->
