@@ -15,4 +15,4 @@ def validate_json(file_path):
     print(f"{file_path} is a valid JSON file.")
 
 if __name__ == "__main__":
-    validate_json('inks.json')
+    validate_json('json_data/inks.json')
