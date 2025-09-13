@@ -4,7 +4,7 @@ from collections import Counter
 import os
 
 # URL to the raw inks.json file
-INKS_JSON_URL = "https://raw.githubusercontent.com/Schmiemandev/inkwell-data/main/inks.json"
+INKS_JSON_URL = "https://raw.githubusercontent.com/Schmiemandev/inkwell-data/main/json_data/inks.json"
 README_PATH = "README.md"
 LEADERBOARD_START_MARKER = "<!-- LEADERBOARD_START -->"
 LEADERBOARD_END_MARKER = "<!-- LEADERBOARD_END -->"
