@@ -1,8 +1,8 @@
 [
     {
       "id": 1,
-      "brand": "Diamine",
       "name": "Aurora Borealis",
+      "brand": "Diamine",
       "color": "#004B49",
       "shading": 1,
       "sheen": 1,
