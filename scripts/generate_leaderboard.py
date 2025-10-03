@@ -37,6 +37,7 @@ def generate_leaderboard(inks_data):
     leaderboard_markdown += "| Rank | Contributor | Inks Added |\n"
     leaderboard_markdown += "|---|---|---|
 "
+"
     for i, (contributor, count) in enumerate(top_10):
         leaderboard_markdown += f"| {i + 1} | {contributor} | {count} |\n"
     return leaderboard_markdown
