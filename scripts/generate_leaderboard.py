@@ -35,9 +35,8 @@ def generate_leaderboard(inks_data):
     top_10 = credit_counts.most_common(10)
     leaderboard_markdown = "### Top 10 Contributors\n\n"
     leaderboard_markdown += "| Rank | Contributor | Inks Added |\n"
-    leaderboard_markdown += "|---|---|---|
-"
-"
+    leaderboard_markdown += "|---|---|---|\n"
+
     for i, (contributor, count) in enumerate(top_10):
         leaderboard_markdown += f"| {i + 1} | {contributor} | {count} |\n"
     return leaderboard_markdown
