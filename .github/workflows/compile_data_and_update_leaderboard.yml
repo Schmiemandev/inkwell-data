@@ -84,5 +84,5 @@ jobs:
         with:
           name: PDF-Collections # Renamed
           path: | # Updated paths
-            collections/
+            collections/*.pdf
             inks_and_pens_collection.pdf
