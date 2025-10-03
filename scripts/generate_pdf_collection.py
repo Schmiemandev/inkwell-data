@@ -2,15 +2,15 @@ import json
 import os
 from fpdf import FPDF
 
-# Define paths
+# Define paths (Updated)
 INKS_JSON_PATH = "json_data/inks.json"
 PENS_JSON_PATH = "json_data/pens.json"
-REPORTS_DIR = "reports"
+COLLECTIONS_DIR = "collections" # Renamed
 
-# Output paths for the different reports
-INKS_REPORT_PATH = os.path.join(REPORTS_DIR, "inks_report.pdf")
-PENS_REPORT_PATH = os.path.join(REPORTS_DIR, "pens_report.pdf")
-COMBINED_REPORT_PATH = "inks_and_pens_report.pdf" # At root level
+# Output paths for the different reports (Updated)
+INKS_COLLECTION_PATH = os.path.join(COLLECTIONS_DIR, "inks_collection.pdf")
+PENS_COLLECTION_PATH = os.path.join(COLLECTIONS_DIR, "pens_collection.pdf")
+COMBINED_COLLECTION_PATH = "inks_and_pens_collection.pdf" # Renamed
 
 def load_json_data(file_path):
     """Loads JSON data from a file."""
@@ -29,8 +29,7 @@ def load_json_data(file_path):
 def format_ink_data(ink):
     """Formats a single ink entry into a human-readable string, skipping empty fields."""
     lines = []
-    
-    # Helper to add a line if value is not empty
+
     def add_line(label, value):
         if value is not None and value != '' and value != [] and value != {}:
             if isinstance(value, bool):
@@ -38,9 +37,7 @@ def format_ink_data(ink):
             else:
                 lines.append(f"  {label}: {value}")
 
-    # Ink Name is probably always present and important
     lines.append(f"Ink Name: {ink.get('name', 'N/A')}")
-
     add_line("Brand", ink.get('brand'))
     add_line("Color", ink.get('color'))
     add_line("Shading", ink.get('shading'))
@@ -65,11 +62,9 @@ def format_pen_data(pen):
             else:
                 lines.append(f"  {label}: {value}")
 
-    lines.append(f"Pen Name: {pen.get('name', 'N/A')}") # Assuming pen name is important
-
+    lines.append(f"Pen Name: {pen.get('name', 'N/A')}")
     add_line("Brand", pen.get('brand'))
-    # Add more pen-specific fields as needed, using add_line
-    
+
     return "\n".join(lines) + "\n\n"
 
 def create_pdf_document(title):
@@ -92,59 +87,59 @@ def add_entries_to_pdf(pdf, data, title, formatter_func):
         for entry in data:
             text = formatter_func(entry)
             pdf.multi_cell(0, 5, text)
-            pdf.ln(5) # Increased line break for better spacing
+            pdf.ln(5)
 
-def generate_inks_report(inks_data, output_path):
-    """Generates a PDF report for inks only."""
+def generate_inks_collection(inks_data, output_path): # Renamed
+    """Generates a PDF collection for inks only.""" # Renamed
     if not inks_data:
-        print(f"No ink data found to generate inks report at {output_path}.")
+        print(f"No ink data found to generate inks collection at {output_path}.") # Renamed
         return
 
-    os.makedirs(REPORTS_DIR, exist_ok=True)
-    pdf = create_pdf_document("Inkwell Inks Report")
+    os.makedirs(COLLECTIONS_DIR, exist_ok=True)
+    pdf = create_pdf_document("Inkwell Inks Collection") # Renamed
     add_entries_to_pdf(pdf, inks_data, "Inks", format_ink_data)
     pdf.output(output_path)
-    print(f"Inks report generated at {output_path}")
+    print(f"Inks collection generated at {output_path}") # Renamed
 
-def generate_pens_report(pens_data, output_path):
-    """Generates a PDF report for pens only."""
+def generate_pens_collection(pens_data, output_path): # Renamed
+    """Generates a PDF collection for pens only.""" # Renamed
     if not pens_data:
-        print(f"No pen data found to generate pens report at {output_path}.")
+        print(f"No pen data found to generate pens collection at {output_path}.") # Renamed
         return
 
-    os.makedirs(REPORTS_DIR, exist_ok=True)
-    pdf = create_pdf_document("Inkwell Pens Report")
+    os.makedirs(COLLECTIONS_DIR, exist_ok=True)
+    pdf = create_pdf_document("Inkwell Pens Collection") # Renamed
     add_entries_to_pdf(pdf, pens_data, "Pens", format_pen_data)
     pdf.output(output_path)
-    print(f"Pens report generated at {output_path}")
+    print(f"Pens collection generated at {output_path}") # Renamed
 
-def generate_combined_report(inks_data, pens_data, output_path):
-    """Generates a combined PDF report for inks and pens."""
+def generate_combined_collection(inks_data, pens_data, output_path): # Renamed
+    """Generates a combined PDF collection for inks and pens.""" # Renamed
     if not inks_data and not pens_data:
-        print(f"No ink or pen data found to generate combined report at {output_path}.")
+        print(f"No ink or pen data found to generate combined collection at {output_path}.") # Renamed
         return
 
-    pdf = create_pdf_document("Inkwell Combined Report")
+    pdf = create_pdf_document("Inkwell Combined Collection") # Renamed
 
     if inks_data:
         add_entries_to_pdf(pdf, inks_data, "Inks", format_ink_data)
-        if pens_data: # Add a page break if both inks and pens are present
+        if pens_data:
             pdf.add_page()
 
     if pens_data:
         add_entries_to_pdf(pdf, pens_data, "Pens", format_pen_data)
-    
+
     pdf.output(output_path)
-    print(f"Combined report generated at {output_path}")
+    print(f"Combined collection generated at {output_path}") # Renamed
 
 def main():
-    """Loads data and generates all specified PDF reports."""
+    """Loads data and generates all specified PDF collections.""" # Renamed
     inks_data = load_json_data(INKS_JSON_PATH)
     pens_data = load_json_data(PENS_JSON_PATH)
 
-    generate_inks_report(inks_data, INKS_REPORT_PATH)
-    generate_pens_report(pens_data, PENS_REPORT_PATH)
-    generate_combined_report(inks_data, pens_data, COMBINED_REPORT_PATH)
+    generate_inks_collection(inks_data, INKS_COLLECTION_PATH) # Renamed
+    generate_pens_collection(pens_data, PENS_COLLECTION_PATH) # Renamed
+    generate_combined_collection(inks_data, pens_data, COMBINED_COLLECTION_PATH) # Renamed
 
 if __name__ == "__main__":
     main()
