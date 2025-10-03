@@ -57,16 +57,20 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Pull latest changes to avoid divergence
           git pull --rebase
-          
           git add .
-          
-          # Only commit and push if there are actual changes
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
             git commit -m "BOT: Auto-compile data and update leaderboard"
             git push
           fi
+
+      - name: Upload PDF Reports as Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDF-Reports
+          path: |
+            reports/
+            inks_and_pens_report.pdf
