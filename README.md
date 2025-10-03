@@ -62,6 +62,7 @@ This repository includes a `scripts` directory containing utility scripts:
 - `validate_json.py`: This script validates all the individual JSON files in the `json_data/inks` and `json_data/pens` directories.
 - `validate_compiled_json.py`: This script validates the final `json_data/inks.json` and `json_data/pens.json` files to ensure they are well-formed.
 - `generate_leaderboard.py`: This script reads the local ink data and updates the contributor leaderboard in this `README.md`.
+- `generate_pdf_report.py`: This script compiles ink and pen data into a human-readable PDF report.
 
 ## Usage in Inkwell App
 
