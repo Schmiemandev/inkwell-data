@@ -1,0 +1,17 @@
+{
+  "id": "f675a196-3732-4466-be51-903575c753ee",
+  "name": "test pen",
+  "brand": "test pen",
+  "model": "test pen",
+  "inkId": null,
+  "nibSize": "Extra-Fine",
+  "fillingMechanism": "Cartridge/Converter",
+  "material": "Resin/Plastic",
+  "purchaseDate": "2025-10-03T00:00:00.000",
+  "notes": "test pen",
+  "mainImagePath": null,
+  "galleryImagePaths": null,
+  "credit": "john doe",
+  "inkingDate": null,
+  "lastModified": "2025-10-03T18:10:51.924128"
+}
