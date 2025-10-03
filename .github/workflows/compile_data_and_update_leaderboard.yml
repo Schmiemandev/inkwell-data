@@ -57,12 +57,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase
+          
           git add .
+          
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
             git commit -m "BOT: Auto-compile data and update leaderboard"
+            git pull --rebase
             git push
           fi
 
