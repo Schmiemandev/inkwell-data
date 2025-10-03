@@ -1,0 +1,3 @@
+# Ignore generated PDF reports
+/reports/
+/inks_and_pens_report.pdf
