@@ -1,0 +1,60 @@
+name: Compile Data & Update Leaderboard
+
+on:
+  # Run when a push happens to the main branch (e.g., a PR is merged)
+  push:
+    branches:
+      - main
+  # Also run on a schedule (once every hour)
+  schedule:
+    - cron: '0    '
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build-and-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # This permission is required to commit back to the repo
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Compile individual ink files into inks.json
+        # The 'jq' tool is pre-installed on GitHub runners.
+        # The -s flag reads all input files into a single array.
+        run: jq -s '.' json_data/inks/*.json > json_data/inks.json
+
+      - name: Compile individual pen files into pens.json
+        run: jq -s '.' json_data/pens/*.json > json_data/pens.json
+
+      - name: Validate compiled inks.json and pens.json
+        run: python scripts/validate_compiled_json.py
+
+      - name: Validate all individual JSON files
+        run: python scripts/validate_json.py
+
+      - name: Update Leaderboard in README
+        run: python scripts/generate_leaderboard.py
+
+      - name: Commit and push if there are changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          # Check if there are any changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "BOT: Auto-compile data and update leaderboard"
+            git push
+          fi

@@ -1,6 +1,6 @@
 # Inkwell Data
 
-This repository serves as the public, community-driven database for the Inkwell mobile app. It contains a curated collection of fountain pen ink data, primarily in the `inks.json` file, which is utilized by the Inkwell app to provide users with a comprehensive and up-to-date resource for tracking their ink collections.
+This repository serves as the public, community-driven database for the Inkwell mobile app. It contains a curated collection of fountain pen and ink data, which is utilized by the Inkwell app to provide users with a comprehensive and up-to-date resource for tracking their collections.
 
 <!-- LEADERBOARD_START -->
 
@@ -22,37 +22,31 @@ The main goal of this repository is to:
 
 ## Data Structure
 
-The core data is stored in `inks.json`. This file is structured as an array of ink objects, with each object containing properties such as:
-- `name`: The name of the ink.
-- `brand`: The brand of the ink.
-- `color`: The color description of the ink.
-- `shading`: (Optional) Boolean indicating if the ink exhibits shading.
-- `sheen`: (Optional) Boolean indicating if the ink exhibits sheen.
-- `shimmer`: (Optional) Boolean indicating if the ink exhibits shimmer.
-- `waterResistance`: (Optional) Boolean indicating if the ink has water resistance.
-- `flow`: (Optional) String indicating the flow (e.g., "Dry", "Medium", "Wet").
-- `notes`: (Optional) Any additional notes about the ink.
-- `credit`: (Optional) Name of the contributor.
-- `purchase link`: (Optional) A URL to purchase the ink.
+The data is stored as individual JSON files within the json_data/inks/ and json_data/pens/ directories. Each file
+represents a single ink or pen object.
 
-Example entry in `inks.json`:
+On every change to the main branch, a GitHub Action automatically compiles these individual files into
+json_data/inks.json and json_data/pens.json. The Inkwell app consumes these compiled files.
+
+### Example Entry
+
+An individual file, like json_data/inks/diamine-writers-blood.json, contains a single object:
+
 ```json
-[
-  {
-    "id": 1,
-    "name": "Aurora Borealis",
-    "brand": "Diamine",
-    "color": "#004B49",
-    "shading": 1,
-    "sheen": 1,
-    "shimmer": 0,
-    "waterResistance": 0,
-    "flow": "Medium",
-    "notes": "A beautiful teal ink with a red sheen.",
-    "credit": "John Doe",
-    "purchase link": "testlink.com"
-  }
-]
+{
+  "id": "some-uuid-provided-by-app",
+  "name": "Writer's Blood",
+  "brand": "Diamine",
+  "color": "#5a0000",
+  "shading": true,
+  "sheen": false,
+  "shimmer": null,
+  "waterResistance": true,
+  "flow": "Wet",
+  "notes": "A very dark red ink with high saturation.",
+  "credit": "Jane Doe",
+  "purchase link": "testlink2.com"
+}
 ```
 
 ## Contributing
@@ -65,9 +59,10 @@ Please ensure your contributions are accurate and well-researched. All submissio
 
 This repository includes a `scripts` directory containing utility scripts:
 
-- `validate_json.py`: This script validates the `json_data/inks.json` file to ensure it is well-formed JSON.
-- `generate_leaderboard.py`: This script fetches ink data and updates the contributor leaderboard in the `README.md`.
+- `validate_json.py`: This script validates all the individual JSON files in the `json_data/inks` and `json_data/pens` directories.
+- `validate_compiled_json.py`: This script validates the final `json_data/inks.json` and `json_data/pens.json` files to ensure they are well-formed.
+- `generate_leaderboard.py`: This script reads the local ink data and updates the contributor leaderboard in this `README.md`.
 
 ## Usage in Inkwell App
 
-The Inkwell mobile application fetches the `inks.json` file from this repository on startup to provide users with a comprehensive list of inks for their collection tracking. This allows the app to stay updated with the latest ink data without requiring app updates.
+The Inkwell mobile application fetches the compiled `json_data/inks.json` and `json_data/pens.json` files from this repository on startup. This allows the app to stay updated with the latest data without requiring app updates.
