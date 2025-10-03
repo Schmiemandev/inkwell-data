@@ -1,17 +1,15 @@
 name: Compile Data & Update Leaderboard
 
 on:
-  # Run on a schedule (once every hour)
   schedule:
     - cron: '0 * * * *'
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   build-and-commit:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # This permission is required to commit back to the repo
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -28,11 +26,9 @@ jobs:
         run: pip install requests fpdf2
 
       - name: Compile individual ink files into inks.json
-        # The 'jq' tool is pre-installed on GitHub runners.
-        # The -s flag reads all input files into a single array.
         run: |
           if ls json_data/inks/*.json 1> /dev/null 2>&1; then
-            jq -s '.' json_data/inks/*.json > json_data/inks.json
+            jq -s '. | sort_by(.brand, .name)' json_data/inks/*.json > json_data/inks.json
           else
             echo "[]" > json_data/inks.json
           fi
@@ -40,7 +36,7 @@ jobs:
       - name: Compile individual pen files into pens.json
         run: |
           if ls json_data/pens/*.json 1> /dev/null 2>&1; then
-            jq -s '.' json_data/pens/*.json > json_data/pens.json
+            jq -s '. | sort_by(.brand, .name)' json_data/pens/*.json > json_data/pens.json
           else
             echo "[]" > json_data/pens.json
           fi
@@ -61,9 +57,13 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Pull latest changes to avoid divergence
           git pull --rebase
+          
           git add .
-          # Check if there are any changes to commit
+          
+          # Only commit and push if there are actual changes
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
