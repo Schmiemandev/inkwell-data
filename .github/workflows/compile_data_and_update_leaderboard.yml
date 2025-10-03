@@ -31,10 +31,20 @@ jobs:
       - name: Compile individual ink files into inks.json
         # The 'jq' tool is pre-installed on GitHub runners.
         # The -s flag reads all input files into a single array.
-        run: jq -s '.' json_data/inks/*.json > json_data/inks.json
+        run: |
+          if ls json_data/inks/*.json 1> /dev/null 2>&1; then
+            jq -s '.' json_data/inks/*.json > json_data/inks.json
+          else
+            echo "[]" > json_data/inks.json
+          fi
 
       - name: Compile individual pen files into pens.json
-        run: jq -s '.' json_data/pens/*.json > json_data/pens.json
+        run: |
+          if ls json_data/pens/*.json 1> /dev/null 2>&1; then
+            jq -s '.' json_data/pens/*.json > json_data/pens.json
+          else
+            echo "[]" > json_data/pens.json
+          fi
 
       - name: Validate compiled inks.json and pens.json
         run: python scripts/validate_compiled_json.py
