@@ -58,13 +58,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
+          # Pull the latest changes from the remote repository first
+          git pull --rebase
+          
+          # Now, add the generated files
           git add .
           
+          # Check if there are any changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
+            # Commit and push the changes
             git commit -m "BOT: Auto-compile data and update leaderboard"
-            git pull --rebase
             git push
           fi
 
