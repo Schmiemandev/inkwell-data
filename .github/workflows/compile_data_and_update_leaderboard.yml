@@ -59,7 +59,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
           # Pull the latest changes from the remote repository first
-          git pull --rebase
+          git pull
           
           # Now, add the generated files
           git add .
