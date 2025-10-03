@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Aurora Borealis",
+    "brand": "Diamine",
+    "color": "#004B49",
+    "shading": true,
+    "sheen": true,
+    "shimmer": false,
+    "waterResistance": false,
+    "flow": "Medium",
+    "notes": "A beautiful teal ink with a red sheen.",
+    "credit": "John Doe",
+    "purchase link": "testlink.com"
+  }
+]
